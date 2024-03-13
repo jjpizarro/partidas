@@ -15,6 +15,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     List<Usuario> findByNombreLike(String nombre);
     @Query("Select u from Usuario u where u.nombre like %?1")
     List<Usuario> buscarPorNombre(String criterio);
-
+    Usuario findByEmail(String email);
 
 }
