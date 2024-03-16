@@ -1,6 +1,7 @@
 package edu.unimagdalena.microg2.exception;
 
-public class UsuarioNotFoundException extends Exception{
+public class UsuarioNotFoundException extends RuntimeException{
+
     public UsuarioNotFoundException() {
         super();
     }
@@ -9,4 +10,7 @@ public class UsuarioNotFoundException extends Exception{
         super(message);
     }
 
+    public UsuarioNotFoundException(Throwable cause) {
+        super(cause);
+    }
 }

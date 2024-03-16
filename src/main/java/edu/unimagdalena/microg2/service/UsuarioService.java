@@ -1,11 +1,13 @@
 package edu.unimagdalena.microg2.service;
 
 import edu.unimagdalena.microg2.dto.usuario.UsuarioDto;
-import edu.unimagdalena.microg2.entities.Usuario;
+import edu.unimagdalena.microg2.dto.usuario.UsuarioToSaveDto;
+import edu.unimagdalena.microg2.exception.UsuarioNotFoundException;
+
 
 public interface UsuarioService {
-    UsuarioDto saveUsuario(Usuario usuario);
-    UsuarioDto upadteUsuario(Usuario usuario);
-    UsuarioDto findUsuarioById(Long id);
-    UsuarioDto findUsuarioByEmail(String email);
+    UsuarioDto guardarUsuario(UsuarioToSaveDto usuario);
+    UsuarioDto actualizarUsuario(UsuarioToSaveDto usuario);
+    UsuarioDto buscarUsuarioById(Long id) throws UsuarioNotFoundException;
+    UsuarioDto buscarUsuarioByEmail(String email);
 }
