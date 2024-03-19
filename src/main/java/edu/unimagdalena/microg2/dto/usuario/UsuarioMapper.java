@@ -5,12 +5,12 @@ import edu.unimagdalena.microg2.dto.sugerencia.SugerenciaMapper;
 import edu.unimagdalena.microg2.entities.Sugerencia;
 import edu.unimagdalena.microg2.entities.Usuario;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 @Component
 public class UsuarioMapper {
-    private SugerenciaMapper sugerenciaMapper;
     public static Usuario usuarioDtoToUsuarioEntity(UsuarioDto usuarioDto){
         Usuario usuario = new Usuario();
         usuario.setNombre(usuarioDto.nombre());
@@ -40,14 +40,16 @@ public class UsuarioMapper {
 
     }
     public static UsuarioDto usuarioEntityToUsuarioDto(Usuario usuario){
-        var sugerencias = usuario.getSugerencias()
-                .stream()
+        var sugerencias = usuario.getSugerencias() != null?
+                usuario.getSugerencias().stream()
                 .map(SugerenciaMapper::sugerenciaEntityToSugerenciaDto)
-                .collect(Collectors.toList());
-        var mensajes = usuario.getMensajes()
-                .stream()
+                .collect(Collectors.toList()):
+                null;
+        var mensajes = usuario.getMensajes() != null?
+                usuario.getMensajes().stream()
                 .map(MensajeMapper::mensajeEntityToMensajeDto)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()):
+                null;
 
         return new UsuarioDto(usuario.getId(),
                 usuario.getNombre(), usuario.getApellido(),

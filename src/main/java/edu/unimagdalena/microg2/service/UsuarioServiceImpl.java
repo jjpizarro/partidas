@@ -13,10 +13,11 @@ import java.util.Objects;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService{
-
+    private final UsuarioMapper usuarioMapper;
     private final UsuarioRepository usuarioRepository;
-
-    public UsuarioServiceImpl(UsuarioRepository usuarioRepository) {
+    @Autowired
+    public UsuarioServiceImpl(UsuarioMapper usuarioMapper, UsuarioRepository usuarioRepository) {
+        this.usuarioMapper = usuarioMapper;
         this.usuarioRepository = usuarioRepository;
     }
 
@@ -38,7 +39,7 @@ public class UsuarioServiceImpl implements UsuarioService{
         Usuario usuario = usuarioRepository.findById(id)
                 .orElseThrow(()-> new UsuarioNotFoundException("Usuario no encontrado"));
 
-        return UsuarioMapper.usuarioEntityToUsuarioDto(usuario);
+        return usuarioMapper.usuarioEntityToUsuarioDto(usuario);
     }
 
     @Override
@@ -46,6 +47,6 @@ public class UsuarioServiceImpl implements UsuarioService{
         Usuario usuario = usuarioRepository.findByEmail(email);
         if(Objects.isNull(usuario))
             throw new UsuarioNotFoundException("Usuario no encontrado");
-        return UsuarioMapper.usuarioEntityToUsuarioDto(usuario);
+        return usuarioMapper.usuarioEntityToUsuarioDto(usuario);
     }
 }
