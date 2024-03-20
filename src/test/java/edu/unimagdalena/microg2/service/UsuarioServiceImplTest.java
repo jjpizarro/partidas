@@ -19,6 +19,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.willDoNothing;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class UsuarioServiceImplTest {
@@ -43,7 +45,16 @@ class UsuarioServiceImplTest {
 
     @Test
     void givenUsuario_whenGuardarUsuario_thenReturnUsuarioGuardado() {
+        usuario =  Usuario.builder()
+                .id(1l)
+                .nombre("test")
+                .apellido("test appelido")
+                .username("test1")
+                .password("123")
+                .email("test@test.com")
+                .build();
         given(usuarioRepository.save(any())).willReturn(usuario);
+        //when(usuarioRepository.save(any())).thenReturn(usuario);
         //GIVEN
 
         UsuarioToSaveDto usuarioAGuardar = new UsuarioToSaveDto(null,
@@ -61,8 +72,17 @@ class UsuarioServiceImplTest {
     @Test
     void givenUserId_whenGetUsuarioById_thenReturnUsuario(){
         Long usuarioId = 1l;
+        usuario =  Usuario.builder()
+                .id(1l)
+                .nombre("test")
+                .apellido("test appelido")
+                .username("test1")
+                .password("123")
+                .email("test@test.com")
+                .build();
         given(usuarioRepository.findById(usuarioId))
                 .willReturn(Optional.of(usuario));
+
         UsuarioDto usuarioDto = usuarioService.buscarUsuarioById(usuarioId);
 
         assertThat(usuarioDto).isNotNull();
@@ -74,5 +94,13 @@ class UsuarioServiceImplTest {
         assertThrows(UsuarioNotFoundException.class,()->{
             usuarioService.buscarUsuarioById(any());
         },"Usuario no encontrado");
+    }
+    @Test
+    void givenUsuario_whenCallRemoveUsuario_thenNothing(){
+        Long usuarioId = 1l;
+        willDoNothing().given(usuarioRepository).delete(any());
+        usuarioService.removerUsuario(usuarioId);
+
+        verify(usuarioRepository, times(1)).delete(any());
     }
 }
