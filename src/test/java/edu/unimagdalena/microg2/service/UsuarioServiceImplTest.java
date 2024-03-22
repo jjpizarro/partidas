@@ -57,7 +57,7 @@ class UsuarioServiceImplTest {
         //when(usuarioRepository.save(any())).thenReturn(usuario);
         //GIVEN
 
-        UsuarioToSaveDto usuarioAGuardar = new UsuarioToSaveDto(null,
+        UsuarioToSaveDto usuarioAGuardar = new UsuarioToSaveDto(
                 "test",
                 "test appelido",
                 "test1",
@@ -72,14 +72,7 @@ class UsuarioServiceImplTest {
     @Test
     void givenUserId_whenGetUsuarioById_thenReturnUsuario(){
         Long usuarioId = 1l;
-        usuario =  Usuario.builder()
-                .id(1l)
-                .nombre("test")
-                .apellido("test appelido")
-                .username("test1")
-                .password("123")
-                .email("test@test.com")
-                .build();
+
         given(usuarioRepository.findById(usuarioId))
                 .willReturn(Optional.of(usuario));
 

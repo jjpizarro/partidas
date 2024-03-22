@@ -15,4 +15,8 @@ public class UsuarioNotFoundException extends RuntimeException{
     public UsuarioNotFoundException(Throwable cause) {
         super(cause);
     }
+
+    public UsuarioNotFoundException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+        super(message, cause, enableSuppression, writableStackTrace);
+    }
 }

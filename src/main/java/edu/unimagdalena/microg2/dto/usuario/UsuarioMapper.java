@@ -5,9 +5,7 @@ import edu.unimagdalena.microg2.dto.sugerencia.SugerenciaMapper;
 import edu.unimagdalena.microg2.entities.Sugerencia;
 import edu.unimagdalena.microg2.entities.Usuario;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.stream.Collectors;
 @Component
 public class UsuarioMapper {

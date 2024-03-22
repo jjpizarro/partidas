@@ -15,9 +15,9 @@ import java.util.Optional;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService{
-    private final UsuarioMapper usuarioMapper;
+     private final UsuarioMapper usuarioMapper;
     private final UsuarioRepository usuarioRepository;
-    @Autowired
+
     public UsuarioServiceImpl(UsuarioMapper usuarioMapper, UsuarioRepository usuarioRepository) {
         this.usuarioMapper = usuarioMapper;
         this.usuarioRepository = usuarioRepository;
@@ -33,7 +33,8 @@ public class UsuarioServiceImpl implements UsuarioService{
 
     @Override
     public UsuarioDto actualizarUsuario(Long id, UsuarioToSaveDto usuarioDto) {
-        /*Usuario usuarioInDb = usuarioRepository.findById(id).orElseThrow(()->new UsuarioNotFoundException("Usuario no encontrado"));
+        /*Usuario usuarioInDb = usuarioRepository.findById(id)
+                    .orElseThrow(()->new UsuarioNotFoundException("Usuario no encontrado"));
         usuarioInDb.setNombre(usuarioDto.nombre());
         usuarioInDb.setApellido(usuarioDto.apellido());
         usuarioInDb.setEmail(usuarioDto.email());
