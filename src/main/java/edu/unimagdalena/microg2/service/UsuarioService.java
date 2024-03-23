@@ -4,6 +4,8 @@ import edu.unimagdalena.microg2.dto.usuario.UsuarioDto;
 import edu.unimagdalena.microg2.dto.usuario.UsuarioToSaveDto;
 import edu.unimagdalena.microg2.exception.UsuarioNotFoundException;
 
+import java.util.List;
+
 
 public interface UsuarioService {
     UsuarioDto guardarUsuario(UsuarioToSaveDto usuario);
@@ -11,4 +13,5 @@ public interface UsuarioService {
     UsuarioDto buscarUsuarioById(Long id) throws UsuarioNotFoundException;
     UsuarioDto buscarUsuarioByEmail(String email);
     void removerUsuario(Long id);
+    List<UsuarioDto> getAllUsers();
 }
